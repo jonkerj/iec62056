@@ -1,0 +1,74 @@
+// a telegram is a list of objects
+
+telegram : header_iec objects footer_iec
+         | header_dsmr objects _CRLF footer_dsmr
+
+header_iec : "/" vendor version model _CRLF "\x02"
+header_dsmr : "/" vendor version _dsmr_header_seperator? model _CRLF _CRLF
+
+_dsmr_header_seperator : "\x02"
+                      | "\2"
+
+vendor : CHARACTER~3
+version : CHARACTER | " "
+model : CHARACTER+
+
+footer_iec : "!" _CRLF "\x03" checksum1
+
+footer_dsmr : "!" checksum4? _CRLF
+
+checksum1 : /./
+checksum4 : /..../
+
+objects : object (_CRLF object)*
+
+// these are the objects we know
+object : id cosem           -> register
+       | id mbus            -> timestamp_register
+       | id profilegeneric  -> log
+       | id dsmr3_gas       -> dsmr3_gas_register
+
+// according to DLMS/COSEM spec, there can be 6 ID codes (A-F)
+// DSMR seems to use only A-E, kamstrup multical only C/D
+id : INT "-" INT ":" INT "." INT "." INT -> id_abcde
+   | INT "." INT                         -> id_cd
+
+// COSEM has these ways to represent a (or no) value
+cosem : "(" value ")"          -> cosem_value
+      | "()"                   -> cosem_empty
+      | "(" value "*" unit ")" -> cosem_value_unit
+
+unit : STRING
+value : STRING
+
+// m-bus, dsmr4/5 store gas meter info here
+mbus : "(" timestamp ")" cosem
+
+// really could not find the specs for this. The three INTs are probably useful for something, but I don't know
+// my guess would be 'type', 'id' and 'switch'
+dsmr3_gas : "(" timestamp ")" "(" INT ")" "(" INT ")" "(" INT ")" "(" id ")" "(" unit  ")" "(" value ")"
+
+// so called "Profile Generic" type of object, afaik only used for power failure log entries
+profilegeneric : "(" INT ")" "(" id ")" logentry*
+logentry : "(" timestamp ")" cosem
+
+// time according to dsmr spec
+timestamp : DATETIME DST?
+
+DATETIME : DIGIT~12
+DST : "S"
+    | "W"
+
+CHARACTER : "A".."Z" | "a".."z" | "0".."9" | "." | "-" | "_"
+STRING : CHARACTER+
+
+// we don't need CRLF. Besides, Kamstrup multical lacks trailing CRLF on last object
+CR : /\r/
+LF : /\n/
+_CRLF : CR LF
+%ignore _CRLF
+
+// we use these from common
+%import common.DECIMAL
+%import common.DIGIT
+%import common.INT
