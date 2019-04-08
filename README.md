@@ -9,6 +9,9 @@ differs from other libraries in several ways:
   robust and extendable.
 * It is designed as an external library instead of being inseperable with other
   software components (such as P1 serial readers).
+* It aims to handle all IEC 62056 formatted telegrams, not only DSMR. I needed
+  this, because of my IEC 1107 speaking district heat meter, which resembles
+  DSMR.
 
 # Compatibility
 This module is targeted to be compatible with all kinds of digital meters
@@ -17,7 +20,7 @@ outputting IEC62056 formatted telegrams. It implements several (sub)standards.
 ## Standards
 The module implements the following standards:
 
-* IEC 1107/IEC 62056-21 (COSEM, OBIS)
+* IEC 1107/IEC 62056-21 (COSEM, OBIS). IEC 1107 was superseded by IEC 62056
 * DSMR (versions 2.2, 4.0, 4.0.5, 4.0.7, 4.2, 5.0)
 
 ## Data types
