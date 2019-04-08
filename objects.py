@@ -106,4 +106,7 @@ class Telegram(object):
 		self.checksum = checksum
 	
 	def  __repr__(self):
-		return '<Telegram {}/{} carrying {} objects, checksum={}>'.format(self.vendor, self.model, len(self.objects), self.checksum)
+		return '<Telegram {}/{} containing {} checksum={}>'.format(self.vendor, self.model, ','.join(self.keys()), self.checksum)
+	
+	def keys(self):
+		return [o.name for o in self.objects]
