@@ -13,4 +13,8 @@ for entry in os.listdir('samples'):
 	if os.path.isfile(filename):
 		print('Parsing {}'.format(filename))
 		telegram = open(filename, 'rb').read().decode('ascii')
-		print(p.parse(telegram))
+		t = p.parse(telegram)
+		for k in t.keys():
+			o = t[k]
+			if isinstance(o, objects.Register):
+				print('  {} = {}'.format(k, o.value))

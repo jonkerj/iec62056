@@ -110,3 +110,9 @@ class Telegram(object):
 	
 	def keys(self):
 		return [o.name for o in self.objects]
+	
+	def __getitem__(self, name):
+		for o in self.objects:
+			if o.name == name:
+				return o
+		raise ValueError('key "{}" not in telegram'.format(name))
