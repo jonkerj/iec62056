@@ -39,6 +39,22 @@ Testing was done with sample telegrams from the following meters:
 * Iskra MT 382
 * Landis + Gyr E350/ZCF110
 
+# Usage
+
+```python
+$ pip install iec62056
+$ python3
+>>> import iec62056
+>>> p = iec62056.parser.Parser()
+>>> t = p.parse(b'... your telegram ')
+>>> print(t.keys())
+>>> for k in t.keys():
+...   o = t[k]
+...   if isinstance(o, iec62056.objects.Register):
+...     print('  {} = {}'.format(k, o.value))
+>>>
+```
+
 # Thanks
 Since specs on IEC 62056/1107 and DSMR can sometimes be tough to find or
 interpret, I used a lot of concepts from other projects. I've used knowledge

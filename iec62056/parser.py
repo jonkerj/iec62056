@@ -1,7 +1,8 @@
 import logging
+import os
+import os.path
 from lark import Lark, Transformer
-import parsers
-import objects
+import iec62056.objects
 
 class IECTransformer(Transformer):
 	def vendor(self, tree):
@@ -39,10 +40,10 @@ class IECTransformer(Transformer):
 		return int(h, 16)
 	
 	def id_abcde(self, tree):
-		return objects.Reference(tuple(map(int, tree)))
+		return iec62056.objects.Reference(tuple(map(int, tree)))
 
 	def id_cd(self, tree):
-		return objects.Reference((None, None, int(tree[0]), int(tree[1]), None))
+		return iec62056.objects.Reference((None, None, int(tree[0]), int(tree[1]), None))
 	
 	def value(self, tree):
 		return str(tree[0])
@@ -64,20 +65,20 @@ class IECTransformer(Transformer):
 		# tree[0] = YYMMDDhhmmss
 		# tree[1] = X (DST)
 		if len(tree) == 2:
-			return parsers.timestamp(tree[0] + tree[1])
+			return iec62056.objects.timestamp(tree[0] + tree[1])
 		else:
-			return parsers.timestamp(tree[0])
+			return iec62056.objects.timestamp(tree[0])
 	
 	def register(self, tree):
 		reference, (value, unit) = tree
-		return objects.Register.factory(reference, None, value, unit)
+		return iec62056.objects.Register.factory(reference, None, value, unit)
 	
 	def mbus(self, tree):
 		return (tree[0], tree[1])
 	
 	def timestamp_register(self, tree):
 		reference, (timestamp, (value, unit)) = tree
-		return objects.Register.factory(reference, timestamp, value, unit)
+		return iec62056.objects.Register.factory(reference, timestamp, value, unit)
 	
 	def logentry(self, tree):
 		return (tree[0], tree[1][0], tree[1][1])
@@ -87,29 +88,31 @@ class IECTransformer(Transformer):
 		reference = tree.pop(0)
 		entries = tree
 		assert len(entries) == n
-		return [objects.Register.factory(reference, timestamp, value, unit) for timestamp, value, unit in entries]
+		return [iec62056.objects.Register.factory(reference, timestamp, value, unit) for timestamp, value, unit in entries]
 	
 	def log(self, tree):
 		reference = tree.pop(0)
 		entries = tree
-		return objects.Log.factory(reference, entries)
+		return iec62056.objects.Log.factory(reference, entries)
 	
 	def dsmr3_gas(self, tree):
 		return (tree[0], tree[4], tree[5], tree[6])
 	
 	def dsmr3_gas_register(self, tree):
 		register, (timestamp, reg, unit, value) = tree
-		return objects.Register.factory(reg, timestamp, value, unit)
+		return iec62056.objects.Register.factory(reg, timestamp, value, unit)
 	
 	def objects(self, tree):
 		return tree
 	
 	def telegram(self, tree):
-		return objects.Telegram(tree[0], tree[1], tree[2])
+		return iec62056.objects.Telegram(tree[0], tree[1], tree[2])
 
 class Parser(object):
 	def __init__(self):
-		self.parser = Lark.open('iec62056.lark', start='telegram')
+		this_dir, this_filename = os.path.split(__file__)
+		grammar_file = os.path.join(this_dir, 'grammar.lark')
+		self.parser = Lark.open(grammar_file, start='telegram')
 		self.transformer = IECTransformer()
 	
 	def parse(self, data):

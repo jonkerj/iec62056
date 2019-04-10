@@ -1,13 +1,9 @@
 import os
 import os.path
-import iec62056
-import objects
+import iec62056.parser
+import iec62056.objects
 
-for o in objects.cosem_objects:
-	if not len(o) == 3:
-		print(o)
-
-p = iec62056.Parser()
+p = iec62056.parser.Parser()
 for entry in os.listdir('samples'):
 	filename = os.path.join('samples', entry)
 	if os.path.isfile(filename):
@@ -16,5 +12,5 @@ for entry in os.listdir('samples'):
 		t = p.parse(telegram)
 		for k in t.keys():
 			o = t[k]
-			if isinstance(o, objects.Register):
+			if isinstance(o, iec62056.objects.Register):
 				print('  {} = {}'.format(k, o.value))
