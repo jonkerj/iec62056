@@ -39,10 +39,10 @@ class IECTransformer(Transformer):
 		return int(h, 16)
 	
 	def id_abcde(self, tree):
-		return '{}-{}:{}.{}.{}'.format(*tree)
+		return objects.Reference(tuple(map(int, tree)))
 
 	def id_cd(self, tree):
-		return '{}.{}'.format(*tree)
+		return objects.Reference((None, None, int(tree[0]), int(tree[1]), None))
 	
 	def value(self, tree):
 		return str(tree[0])
