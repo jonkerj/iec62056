@@ -9,7 +9,7 @@ setup(
 	author='Jorik Jonker',
 	author_email='jorik@kippendief.biz',
 	url='https://github.com/jonkerj/iec62056',
-	version='0.1.1',
+	version='0.1.7',
 	packages=find_packages(),
 	package_data={
 		'iec62056': ['*.lark'],
