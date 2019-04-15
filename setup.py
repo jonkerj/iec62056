@@ -26,5 +26,5 @@ setup(
 	name='iec62056',
 	packages=find_packages(),
 	url='https://github.com/jonkerj/iec62056',
-	version='0.1.11',
+	version='0.1.12',
 )
