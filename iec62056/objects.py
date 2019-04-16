@@ -1,3 +1,4 @@
+import datetime
 import time
 
 class Reference(object):
@@ -60,7 +61,7 @@ class Register(COSEM):
 	
 	def __repr__(self):
 		if self.timestamp is not None:
-			t = time.strftime('%c', self.timestamp)
+			t = self.timestamp.strftime("%c")
 		else:
 			t = None
 		return '<Register reference={} name={} timestamp={} value={} unit={}>'.format(self.reference, self.name, t, self.value, self.unit)
@@ -134,7 +135,7 @@ class TimeValue(Value):
 		self.value = timestamp(value)
 
 	def __str__(self):
-		return time.strftime('%c', self.value)
+		return self.value.strftime('%c')
 
 def timestamp(raw):
 	# cosem timestamp format = YYMMDDhhmmssX
@@ -146,7 +147,7 @@ def timestamp(raw):
 		elif raw[12] == 'W':
 			dst = 0
 	
-	return time.struct_time((
+	t = time.struct_time((
 		2000 + int(raw[0:2]), # YY (year)
 		int(raw[2:4]),        # MM (mon)
 		int(raw[4:6]),        # DD (mday)
@@ -159,6 +160,7 @@ def timestamp(raw):
 		None,                     # N/A (zone)
 		None,                     # N/A (gmtoff)
 	))
+	return datetime.datetime.fromtimestamp(time.mktime(t))
 
 cosem_objects = [
 # These are from various DSMR specs
