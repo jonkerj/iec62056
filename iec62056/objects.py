@@ -163,7 +163,6 @@ def timestamp(raw):
 cosem_objects = [
 # These are from various DSMR specs
 	(Reference((0, 0, 1, 0, 0)),                  'timestamp', TimeValue),
-	(Reference((0, 0, 1, 0, 0)),                  'timestamp', TimeValue),
 	(Reference((0, 0, 17, 0, 0)),                 'threshold_electricity', FloatValue),
 	(Reference((0, 0, 96, 1, 1)),                 'equipment_identifier', StrValue),
 	(Reference((0, 0, 96, 3, 10)),                'electricity_switch_position', IntValue),
