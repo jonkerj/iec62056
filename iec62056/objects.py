@@ -98,7 +98,8 @@ def timestamp(raw):
 	# we ditch the dst flag (S, summer, dst=True, W, winter, dst=False)
 	# since we strptime according to local timezone
 	dt = datetime.datetime.strptime(raw[:12], '%y%m%d%H%M%S')
-	return dt
+	zone = datetime.datetime.now(datetime.timezone.utc).astimezone()
+	return dt.replace(tzinfo=zone.tzinfo)
 
 cosem_objects = [
 # These are from various DSMR specs
