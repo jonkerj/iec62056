@@ -1,3 +1,5 @@
+ALL = []
+
 DSMR_2_2 = (
 	b'/ISk5\x02MT382-1004\r\n'
 	b'\r\n'
@@ -20,6 +22,7 @@ DSMR_2_2 = (
 	b'0-1:24.4.0(1)\r\n'
 	b'!\r\n'
 )
+ALL.append(('DSMR_2_2', DSMR_2_2))
 
 DSMR_3 = (
 	b'/ISk5\x02MT382-1000\r\n'
@@ -43,6 +46,7 @@ DSMR_3 = (
 	b'0-1:24.4.0(1)\r\n'
 	b'!\r\n'
 )
+ALL.append(('DSMR_3', DSMR_3))
 
 ISKRA_AM550 = (
 	b'/ISK5\\2M550T-1012\r\n'
@@ -84,6 +88,7 @@ ISKRA_AM550 = (
 	b'0-1:24.2.1(180104231507W)(00212.529*m3)\r\n'
 	b'!D82C\r\n'
 )
+ALL.append(('ISKRA_AM550', ISKRA_AM550))
 
 ISKRA_MT382 = (
 	b'/ISk5\x02MT382-1000\r\n'
@@ -127,6 +132,7 @@ ISKRA_MT382 = (
 	b'0-2:96.1.0()\r\n'
 	b'!87B3\r\n'
 )
+ALL.append(('ISKRA_MT382', ISKRA_MT382))
 
 KAIFA_MA105 = (
 	b'/KFM5KAIFA-METER\r\n'
@@ -166,6 +172,7 @@ KAIFA_MA105 = (
 	b'0-1:24.2.1(161129200000W)(00981.443*m3)\r\n'
 	b'!6796\r\n'
 )
+ALL.append(('KAIFA_MA105', KAIFA_MA105))
 
 KAMSTRUP_MC66 = (
 	b'/KAM MC\r\n'
@@ -175,6 +182,7 @@ KAMSTRUP_MC66 = (
 	b'6.31(0109868*h)!\r\n'
 	b'\x03a'
 )
+ALL.append(('KAMSTRUP_MC66', KAMSTRUP_MC66))
 
 LANDIS_GIR_ZCF100 = (
 	b'/XMX5LGBBFG1012530239\r\n'
@@ -204,3 +212,4 @@ LANDIS_GIR_ZCF100 = (
 	b'0-1:24.2.1(161116200000W)(00066.405*m3)\r\n'
 	b'!CC1E\r\n'
 )
+ALL.append(('LANDIS_GIR_ZCF100', LANDIS_GIR_ZCF100))
