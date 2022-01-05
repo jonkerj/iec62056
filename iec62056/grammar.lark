@@ -4,7 +4,7 @@ telegram : header_iec objects footer_iec
          | header_dsmr objects _CRLF footer_dsmr
 
 header_iec : "/" vendor version model _CRLF "\x02"
-header_dsmr : "/" vendor version _dsmr_header_seperator? model _CRLF _CRLF
+header_dsmr : LF? "/" vendor version _dsmr_header_seperator? model _CRLF _CRLF
 
 _dsmr_header_seperator : "\x02"
                       | "\2"
