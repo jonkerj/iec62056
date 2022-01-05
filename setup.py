@@ -19,12 +19,12 @@ setup(
 	description='Library to parse IEC62056/IEC1107/DSMR telegrams',
 	include_package_data=True,
 	install_requires=[
-		'lark-parser==0.7.0',
+		'lark==1.0.0',
 	],
 	long_description=long_description,
 	long_description_content_type='text/markdown',
 	name='iec62056',
 	packages=find_packages(),
 	url='https://github.com/jonkerj/iec62056',
-	version='0.4.2',
+	version='0.4.3',
 )
