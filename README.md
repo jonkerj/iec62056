@@ -62,6 +62,6 @@ interpret, I used a lot of concepts from other projects. I've used knowledge
 from these projects:
 
 * Nigel Dokter's [dsmr_parser](https://github.com/ndokter/dsmr_parser)
-* Matthijs Kooiman's [arduino-dsmr](https://github.com/matthijskooijman/arduino-dsmr)
+* Matthijs Kooijman's [arduino-dsmr](https://github.com/matthijskooijman/arduino-dsmr)
 * Levien van Zon's [dsmr-p1-parser](https://github.com/lvzon/dsmr-p1-parser)
 * [OpenHAB addon repository](https://github.com/openhab/openhab2-addons)
