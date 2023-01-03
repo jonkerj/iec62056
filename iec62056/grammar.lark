@@ -59,7 +59,7 @@ DATETIME : DIGIT~12
 DST : "S"
     | "W"
 
-CHARACTER : "A".."Z" | "a".."z" | "0".."9" | "." | "-" | "_"
+CHARACTER : "A".."Z" | "a".."z" | "0".."9" | "." | "-" | "_" | " "
 STRING : CHARACTER+
 
 // we don't need CRLF. Besides, Kamstrup multical lacks trailing CRLF on last object

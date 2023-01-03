@@ -57,7 +57,7 @@ class Register(COSEM):
 				value = vcls(raw)
 				name = n
 				return cls(reference, name, timestamp, value, unit)
-		raise NotImplementedError('OBIS reference {} is not implemented'.format(repr(eeference)))
+		raise NotImplementedError('OBIS reference {} is not implemented'.format(repr(reference)))
 	
 	def __repr__(self):
 		if self.timestamp is not None:

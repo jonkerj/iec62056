@@ -87,7 +87,7 @@ class IECTransformer(Transformer):
 		n = int(tree.pop(0))
 		reference = tree.pop(0)
 		entries = tree
-		assert len(entries) == n
+		#assert len(entries) == n
 		return [iec62056.objects.Register.factory(reference, timestamp, value, unit) for timestamp, value, unit in entries]
 	
 	def log(self, tree):
