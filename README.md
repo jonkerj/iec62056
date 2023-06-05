@@ -39,6 +39,7 @@ Testing was done with sample telegrams from the following meters:
 * Iskra MT 382
 * Landis + Gyr E350/ZCF110
 * ZIV 5CTA3 (aka Enexis ESMR5)
+* Aidon 7534
 
 # Usage
 
