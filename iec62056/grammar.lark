@@ -8,6 +8,7 @@ header_dsmr : LF? "/" vendor version _dsmr_header_seperator? model _CRLF _CRLF
 
 _dsmr_header_seperator : "\x02"
                       | "\2"
+                      | " "
 
 vendor : CHARACTER~3
 version : CHARACTER | " "

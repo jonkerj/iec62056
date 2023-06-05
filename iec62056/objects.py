@@ -149,4 +149,18 @@ cosem_objects = [
 	(Reference((None, None, 6, 8, None)),         'energy_consumed', float),
 	(Reference((None, None, 6, 26, None)),        'volume_consumed', float),
 	(Reference((None, None, 6, 31, None)),        'operating_hours', int),
+# From Aidon RJ12 HAN Interface Feature Description
+# e.g. https://www.elenia.fi/files/5b4d7492d2125ed79a8f1424cd5c4539ba360090/aidonfd-rj12-han-interface-en-v17a.pdf
+	(Reference((1, 0, 1, 8, 0)),                  'electricity_used', float),
+	(Reference((1, 0, 2, 8, 0)),                  'electricity_delivered', float),
+	(Reference((1, 0, 3, 8, 0)),                  'reactive_electricity_used', float),
+	(Reference((1, 0, 4, 8, 0)),                  'reactive_electricity_delivered', float),
+	(Reference((1, 0, 3, 7, 0)),                  'instantaneous_reactive_power_positive', float),
+	(Reference((1, 0, 4, 7, 0)),                  'instantaneous_reactive_power_negative', float),
+	(Reference((1, 0, 23, 7, 0)),                 'instantaneous_reactive_power_l1_positive', float),
+	(Reference((1, 0, 24, 7, 0)),                 'instantaneous_reactive_power_l1_negative', float),
+	(Reference((1, 0, 43, 7, 0)),                 'instantaneous_reactive_power_l2_positive', float),
+	(Reference((1, 0, 44, 7, 0)),                 'instantaneous_reactive_power_l2_negative', float),
+	(Reference((1, 0, 63, 7, 0)),                 'instantaneous_reactive_power_l3_positive', float),
+	(Reference((1, 0, 64, 7, 0)),                 'instantaneous_reactive_power_l3_negative', float),
 ]
